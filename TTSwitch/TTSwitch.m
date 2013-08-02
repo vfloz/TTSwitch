@@ -164,7 +164,6 @@ static const CGFloat kTTSwitchAnimationDuration = 0.25;
             thumbMaskLayer.contents = (id)[_thumbMaskImage CGImage];
             self.maskedThumbView.layer.mask = thumbMaskLayer;
         } else {
-            // remove mask if nil
             self.maskedThumbView = [[UIView alloc] initWithFrame:self.bounds];
         }
     }
@@ -177,6 +176,13 @@ static const CGFloat kTTSwitchAnimationDuration = 0.25;
         [_thumbImageView setImage:_thumbImage];
         [_thumbImageView setFrame:(CGRect){ { 0.0f, self.thumbOffsetY }, _thumbImage.size }];
         [self createMasksForLockPosition];
+        [self updateThumbPositionAnimated:NO];
+    }
+}
+
+-(void) setOffThumbImage:(UIImage *)offThumbImage{
+    if (_offThumbImage != offThumbImage) {
+        _offThumbImage = offThumbImage;
         [self updateThumbPositionAnimated:NO];
     }
 }
@@ -318,7 +324,13 @@ static const CGFloat kTTSwitchAnimationDuration = 0.25;
     if (highlighted && self.thumbHighlightImage) {
         self.thumbImageView.image = self.thumbHighlightImage;
     } else {
-        self.thumbImageView.image = self.thumbImage;
+        //self.thumbImageView.image = self.thumbImage;
+        if (self.isOn) {
+            self.thumbImageView.image = self.thumbImage;
+        }else{
+            self.thumbImageView.image = self.offThumbImage;
+        }
+        
     }
 }
 

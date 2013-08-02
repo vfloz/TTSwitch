@@ -30,6 +30,8 @@ typedef void(^TTSwitchChangeHandler)(BOOL on);
 @property (nonatomic, strong) UIImage *trackMaskImage UI_APPEARANCE_SELECTOR;
 @property (nonatomic, strong) UIImage *thumbMaskImage UI_APPEARANCE_SELECTOR;
 
+
+@property (nonatomic, strong) UIImage *offThumbImage UI_APPEARANCE_SELECTOR;
 /**
  If the thumb image has a shadow you will need to add an inset to make it sit flush when fully on or off.
  */
